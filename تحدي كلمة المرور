@@ -1,0 +1,113 @@
+
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>تحدي كلمة المرور</title>
+    <style>
+      /* تحميل الخط من Google Fonts */
+      @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;600&display=swap');
+
+      body {
+        font-family: 'Tajawal', sans-serif;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        background: #f7f9fc;
+        color: #333;
+        direction: rtl;
+      }
+
+      h1 {
+        color: #2c3e50; /* العنوان أصبح أغمق */
+        font-size: 3em;
+        margin-top: 50px;
+      }
+
+      p {
+        font-size: 1.3em;
+        margin: 10px 0;
+      }
+
+      input,
+      button {
+        padding: 15px;
+        font-size: 1.2em;
+        margin: 15px 0;
+        width: 80%;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        outline: none;
+        box-sizing: border-box;
+      }
+
+      input {
+        width: 60%;
+        border: 2px solid #3498db;
+      }
+
+      button {
+        width: 40%;
+        background-color: #2980b9; /* زر أغمق */
+        color: white;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      button:hover {
+        background-color: #2471a3;
+      }
+
+      .message {
+        margin-top: 30px;
+        font-size: 1.5em;
+        color: #333;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>تحدي كلمة المرور</h1>
+    <p>حاول تخمين كلمة المرور الصحيحة بناءً على التلميحات التالية:</p>
+    <ul>
+      <li><b>الاسم:</b> Nora</li>
+      <li><b>تاريخ الميلاد:</b> 6/12/2007</li>
+    </ul>
+    <p><b>عدد حروف كلمة المرور:</b> 12</p>
+    <p><b>عدد المحاولات المسموحة:</b> 5</p>
+
+    <input type="password" id="passwordInput" placeholder="أدخل كلمة المرور" />
+    <button onclick="checkPassword()">إرسال</button>
+    <div id="passwordMessage" class="message"></div>
+
+    <script>
+      const correctPassword = "Nora06122007"; // كلمة المرور الصحيحة
+      let attempts = 5;
+
+      function checkPassword() {
+        const userInput = document.getElementById("passwordInput").value;
+        const passwordMessage = document.getElementById("passwordMessage");
+
+        if (userInput === correctPassword) {
+          passwordMessage.style.color = "green";
+          passwordMessage.innerHTML = `
+            صحيح! لقد نجحت في تخمين كلمة المرور.<br>
+            <b>ملاحظة:</b> من المهم استخدام كلمة مرور قوية وغير قابلة للتخمين لتأمين حساباتك.
+          `;
+        } else {
+          attempts--;
+          if (attempts > 0) {
+            passwordMessage.style.color = "red";
+            passwordMessage.textContent = `كلمة المرور غير صحيحة. لديك ${attempts} محاولات متبقية.`;
+          } else {
+            passwordMessage.style.color = "red";
+            passwordMessage.textContent = "انتهت المحاولات! لقد خسرت التحدي.";
+            document.getElementById("passwordInput").disabled = true;
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
